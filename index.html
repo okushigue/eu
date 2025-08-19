@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Portfolio - Dark Theme</title>
+    <title>Jefferson M. Okushigue - Personal Portfolio</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
@@ -362,6 +362,24 @@
             margin-top: 20px;
         }
         
+        .contact-info {
+            margin-top: 30px;
+            text-align: center;
+        }
+        
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+        }
+        
+        .contact-info-item i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
         /* Responsive */
         @media (max-width: 768px) {
             .hero h1 {
@@ -470,7 +488,7 @@
                     </p>
                 </div>
                 <div class="about-image">
-                    <img src="https://picsum.photos/seed/profile123/280/280.jpg" alt="Profile Photo" width="280" height="280">
+                    <img src="https://picsum.photos/seed/jefferson123/280/280.jpg" alt="Jefferson M. Okushigue" width="280" height="280">
                 </div>
             </div>
         </div>
@@ -552,26 +570,33 @@
                     <span data-en="Send Message" data-pt="Enviar Mensagem">Send Message</span>
                 </button>
             </form>
+            
+            <div class="contact-info">
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>okushigue@gmail.com</span>
+                </div>
+            </div>
         </div>
     </section>
 
     <footer>
         <div class="container">
             <div class="social-links">
-                <a href="https://facebook.com/okushigue" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <a href="https://facebook.com/seu-perfil" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                     <i class="fab fa-facebook-f"></i>
                 </a>
-                <a href="https://instagram.com/okushigue" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <a href="https://instagram.com/seu-perfil" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                     <i class="fab fa-instagram"></i>
                 </a>
-                <a href="https://youtube.com/okushigue" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                <a href="https://youtube.com/seu-canal" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
                     <i class="fab fa-youtube"></i>
                 </a>
-                <a href="https://discord.gg/okushigue" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+                <a href="https://discord.gg/seu-servidor" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Discord">
                     <i class="fab fa-discord"></i>
                 </a>
             </div>
-            <p class="copyright" data-en="© 2025 Jefferson M. Okushigue. All rights reserved." data-pt="© 2025 Seu Nome. Todos os direitos reservados.">© 2025 Jefferson M. Okushigue. All rights reserved.</p>
+            <p class="copyright" data-en="© 2025 Jefferson M. Okushigue. All rights reserved." data-pt="© 2025 Jefferson M. Okushigue. Todos os direitos reservados.">© 2025 Jefferson M. Okushigue. All rights reserved.</p>
         </div>
     </footer>
 
