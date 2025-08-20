@@ -32,6 +32,8 @@
     .link { color: var(--accent); }
     .link:hover { color: #46d3ee; }
     .kbd { border: 1px solid var(--border); padding: 2px 6px; border-radius: 6px; background: #111; font-family: 'Roboto Mono', monospace; font-size: 0.85rem; color: #d6eaff; }
+    .publication-date { color: var(--text-secondary); font-size: 0.9rem; }
+    .publication-links { display: flex; gap: 1rem; margin-top: 0.5rem; }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -49,7 +51,6 @@
       </div>
     </div>
   </header>
-
   <!-- Hero -->
   <section class="py-16">
     <div class="container mx-auto px-5 text-center">
@@ -61,7 +62,6 @@
       </div>
     </div>
   </section>
-
   <!-- Profile -->
   <section class="py-12 border-t" style="border-color: var(--border);">
     <div class="container mx-auto px-5 grid md:grid-cols-3 gap-8 items-center">
@@ -83,7 +83,6 @@
       </div>
     </div>
   </section>
-
   <!-- Research Projects -->
   <section class="py-14 border-t" style="border-color: var(--border);">
     <div class="container mx-auto px-5">
@@ -91,7 +90,7 @@
       <div class="grid md:grid-cols-2 gap-6">
         <article class="card p-6">
           <h3 class="text-2xl font-semibold mb-2">Zeta Vibration Theory (ZVT)</h3>
-          <p class="text-gray-400 mb-3" data-en="Resonances between Riemann zeta zeros and the fine-structure constant." data-pt="Ressonâncias entre zeros da zeta de Riemann e a constante de estrutura fina.">Resonances between Riemann zeta zeros and the fine-structure constant.</p>
+          <p class="text-gray-400 mb-3" data-en="Mathematical foundation connecting Riemann zeta zeros to fundamental physical constants." data-pt="Fundamentação matemática conectando zeros da zeta de Riemann às constantes físicas fundamentais.">Mathematical foundation connecting Riemann zeta zeros to fundamental physical constants.</p>
           <a class="link" href="https://okushigue.github.io/zvt" target="_blank" rel="noopener">View Project →</a>
         </article>
         <article class="card p-6">
@@ -102,24 +101,33 @@
       </div>
     </div>
   </section>
-
   <!-- Publications -->
   <section class="py-14 border-t" style="border-color: var(--border);">
     <div class="container mx-auto px-5">
       <h2 class="section-title" data-en="Publications" data-pt="Publicações">Publications</h2>
       <div class="grid gap-4">
         <div class="card p-5">
-          <h3 class="text-lg font-semibold">Zeta Vibration Theory (ZVT): Computational Validation and New Physics Predictions</h3>
-          <p class="text-gray-400">Preprint, 2025</p>
-          <div class="mt-3 flex gap-3">
+          <h3 class="text-lg font-semibold">Zeta Vibration Theory (ZVT): Mathematical Foundation and Physical Predictions</h3>
+          <p class="publication-date">Preprint, 2025</p>
+          <p class="text-gray-400 mt-2" data-en="A mathematically rigorous formulation establishing connections between Riemann zeta zeros and physical constants, with predictions for a Z' boson at 1.26 GeV and energy-dependent Lorentz violation." data-pt="Uma formulação matematicamente rigorosa estabelecendo conexões entre zeros da zeta de Riemann e constantes físicas, com previsões para um bóson Z' a 1.26 GeV e violação de Lorentz dependente de energia.">A mathematically rigorous formulation establishing connections between Riemann zeta zeros and physical constants, with predictions for a Z' boson at 1.26 GeV and energy-dependent Lorentz violation.</p>
+          <div class="publication-links">
             <a class="link" href="https://okushigue.github.io/zvt" target="_blank" rel="noopener">Read →</a>
+            <a class="link" href="#" onclick="navigator.clipboard.writeText(window.location.href);return false;">Share</a>
+            <a class="link" href="https://arxiv.org/abs/xxxx.xxxxx" target="_blank" rel="noopener">arXiv →</a>
+          </div>
+        </div>
+        <div class="card p-5">
+          <h3 class="text-lg font-semibold">Computational Validation of Zeta Resonances in Quantum Systems</h3>
+          <p class="publication-date">Preprint, 2024</p>
+          <p class="text-gray-400 mt-2" data-en="Large-scale computational analysis of over 2 million zeta zeros using quantum algorithms and validation of resonance patterns." data-pt="Análise computacional em larga escala de mais de 2 milhões de zeros da zeta usando algoritmos quânticos e validação de padrões de ressonância.">Large-scale computational analysis of over 2 million zeta zeros using quantum algorithms and validation of resonance patterns.</p>
+          <div class="publication-links">
+            <a class="link" href="https://okushigue.github.io/riemann-zeros-analysis" target="_blank" rel="noopener">Read →</a>
             <a class="link" href="#" onclick="navigator.clipboard.writeText(window.location.href);return false;">Share</a>
           </div>
         </div>
       </div>
     </div>
   </section>
-
   <!-- Timeline -->
   <section class="py-14 border-t" style="border-color: var(--border);">
     <div class="container mx-auto px-5">
@@ -127,16 +135,15 @@
       <div class="grid md:grid-cols-2 gap-4">
         <div class="card p-5">
           <h4 class="text-accent text-xl" style="color: var(--accent2);">2025</h4>
-          <p>Preprint ZVT e consolidação dos algoritmos de ressonância.</p>
+          <p>Mathematical foundation of ZVT completed. Preprint submitted for peer review.</p>
         </div>
         <div class="card p-5">
           <h4 class="text-accent text-xl" style="color: var(--accent2);">2024</h4>
-          <p>Pipeline de análise com &gt; 2 milhões de zeros e validações cruzadas.</p>
+          <p>Computational pipeline with > 2 million zeros and cross-validations completed.</p>
         </div>
       </div>
     </div>
   </section>
-
   <!-- Contact + Socials -->
   <section class="py-16 border-t text-center" style="border-color: var(--border);">
     <h2 class="section-title" data-en="Get in Touch" data-pt="Entre em Contato">Get in Touch</h2>
@@ -149,14 +156,12 @@
       <a class="chip" href="https://youtube.com/okushigue" target="_blank" rel="noopener" aria-label="YouTube">YouTube</a>
       <a class="chip" href="https://discord.gg/okushigue" target="_blank" rel="noopener" aria-label="Discord">Discord</a>
       <a class="chip" href="https://instagram.com/okushigue" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
-      <a class="chip" href="https://facebook.com/okushigue" target="_blank" rel="noopener" aria-label="Instagram">Facebook</a>
+      <a class="chip" href="https://facebook.com/okushigue" target="_blank" rel="noopener" aria-label="Facebook">Facebook</a>
     </div>
   </section>
-
   <footer class="border-t py-8 text-center text-gray-400" style="border-color: var(--border);">
     © 2025 Jefferson M. Okushigue. All rights reserved.
   </footer>
-
   <script>
     // Language toggle (EN/PT)
     const langBtn = document.getElementById('langBtn');
