@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPC Framework - Conexão Riemann-Física</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #1e3a8a;
+            --secondary-color: #3b82f6;
+            --accent-color: #60a5fa;
+            --light-bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent-color);
+        }
+
+        .card {
+            border: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-header {
+            background-color: var(--secondary-color);
+            color: white;
+            font-weight: 600;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        .stat-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .language-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .language-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+        }
+
+        .language-btn:hover:not(.active) {
+            background-color: rgba(59, 130, 246, 0.1);
+        }
+
+        .flag-icon {
+            width: 20px;
+            height: 15px;
+            margin-right: 6px;
+            border-radius: 2px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .badge-resonance {
+            background-color: #10b981;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+        }
+
+        .insight-card {
+            background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+            border-left: 4px solid var(--secondary-color);
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
+            .language-switcher {
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão de troca de idiomas -->
+    <div class="language-switcher">
+        <button class="language-btn active" data-lang="pt" onclick="changeLanguage('pt')">
+            <img src="https://flagcdn.com/w20/br.png" alt="Português" class="flag-icon"> PT
+        </button>
+        <button class="language-btn" data-lang="en" onclick="changeLanguage('en')">
+            <img src="https://flagcdn.com/w20/us.png" alt="English" class="flag-icon"> EN
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="hero-title" id="hero-title">RPC Framework</h1>
+            <p class="hero-subtitle" id="hero-subtitle">Conexão Riemann-Física: Estrutura Matemática das Constantes Físicas</p>
+            <p class="mt-3" id="hero-description">Uma estrutura revolucionária que conecta a matemática pura com fenômenos físicos através dos zeros de Riemann</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Visão Geral -->
+        <section class="mb-5">
+            <h2 class="section-title" id="overview-title">Visão Geral</h2>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">100%</div>
+                        <div class="stat-label" id="stat-label-1">Ressonância Perfeita</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">5</div>
+                        <div class="stat-label" id="stat-label-2">Constantes Físicas</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">6</div>
+                        <div class="stat-label" id="stat-label-3">Partículas Fantasmas</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-number">23%</div>
+                        <div class="stat-label" id="stat-label-4">Ganho de Sensibilidade</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resultados Experimentais -->
+        <section class="mb-5">
+            <h2 class="section-title" id="experimental-title">Resultados Experimentais</h2>
+            <div class="table-container">
+                <h4 class="mb-3" id="constants-title">Detalhes das Constantes Físicas</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th id="table-header-1">Constante</th>
+                            <th id="table-header-2">Zero de Riemann</th>
+                            <th id="table-header-3">Taxa de Sucesso</th>
+                            <th id="table-header-4">p-value</th>
+                            <th id="table-header-5">Força de Ressonância</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="constant-1">Constante Gravitacional</td>
+                            <td>gravitational_zero</td>
+                            <td>46.05%</td>
+                            <td>0.000</td>
+                            <td><span class="badge badge-resonance">1.0</span></td>
+                        </tr>
+                        <tr>
+                            <td id="constant-2">Estrutura Fina</td>
+                            <td>alpha_zero</td>
+                            <td>38.83%</td>
+                            <td>0.000</td>
+                            <td><span class="badge badge-resonance">1.0</span></td>
+                        </tr>
+                        <tr>
+                            <td id="constant-3">Massa do Elétron</td>
+                            <td>electron_mass_zero</td>
+                            <td>26.63%</td>
+                            <td>0.000</td>
+                            <td><span class="badge badge-resonance">1.0</span></td>
+                        </tr>
+                        <tr>
+                            <td id="constant-4">Constante de Planck (ħ)</td>
+                            <td>hbar_zero</td>
+                            <td>25.95%</td>
+                            <td>0.028</td>
+                            <td><span class="badge badge-resonance">1.0</span></td>
+                        </tr>
+                        <tr>
+                            <td id="constant-5">Massa do Próton</td>
+                            <td>proton_mass_zero</td>
+                            <td>25.72%</td>
+                            <td>0.096</td>
+                            <td><span class="badge badge-resonance">1.0</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Análise de Neutrinos -->
+        <section class="mb-5">
+            <h2 class="section-title" id="neutrino-title">Detecção de Neutrinos Cósmicos</h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="mb-0" id="predictions-title">Previsões para Novas Fontes</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="insight-card">
+                                        <h5><i class="bi bi-stars"></i> GRB Afterglow</h5>
+                                        <p><strong id="energy-label">Energia:</strong> 10¹² - 10¹⁵ eV</p>
+                                        <p><strong id="detection-label">Probabilidade de Detecção:</strong> 32.5%</p>
+                                        <p><strong id="feasibility-label">Viabilidade:</strong> <span id="feasibility-medium">Média</span></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="insight-card">
+                                        <h5><i class="bi bi-stars"></i> AGN Core</h5>
+                                        <p><strong id="energy-label2">Energia:</strong> 10⁹ - 10¹³ eV</p>
+                                        <p><strong id="detection-label2">Probabilidade de Detecção:</strong> 30.4%</p>
+                                        <p><strong id="feasibility-label2">Viabilidade:</strong> <span id="feasibility-medium2">Média</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visão de Futuro -->
+        <section class="mb-5">
+            <h2 class="section-title" id="future-title">Visão de Futuro</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-universal-circle" style="font-size: 3rem; color: var(--secondary-color);"></i>
+                            <h5 class="mt-3" id="unification-title">Unificação Física-Matemática</h5>
+                            <p id="unification-desc">RPC Framework conecta matemática pura com fenômenos físicos, eliminando a fronteira entre teoria e experimento.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-rocket-takeoff" style="font-size: 3rem; color: var(--secondary-color);"></i>
+                            <h5 class="mt-3" id="tech-title">Tecnologias Revolucionárias</h5>
+                            <p id="tech-desc">Sistemas de comunicação baseados em padrões matemáticos, novas formas de energia e tecnologias quânticas práticas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <i class="bi bi-globe" style="font-size: 3rem; color: var(--secondary-color);"></i>
+                            <h5 class="mt-3" id="collaboration-title">Colaboração Global</h5>
+                            <p id="collaboration-desc">Dados abertos, plataformas unificadas e consórcios internacionais para validar descobertas e acelerar o progresso.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>RPC Framework</h5>
+                    <p>Riemann-Physics Connection: Mathematical Structure of Physical Constants</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p id="footer-desc">Uma nova era para a humanidade, onde a compreensão profunda da estrutura matemática do universo nos capacita a resolver grandes desafios e alcançar novos patamares de civilização.</p>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            <div class="text-center">
+                <p class="mb-0">&copy; 2025 RPC Framework. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Traduções simplificadas
+        const translations = {
+            pt: {
+                "hero-title": "RPC Framework",
+                "hero-subtitle": "Conexão Riemann-Física: Estrutura Matemática das Constantes Físicas",
+                "hero-description": "Uma estrutura revolucionária que conecta a matemática pura com fenômenos físicos através dos zeros de Riemann",
+                "overview-title": "Visão Geral",
+                "stat-label-1": "Ressonância Perfeita",
+                "stat-label-2": "Constantes Físicas",
+                "stat-label-3": "Partículas Fantasmas",
+                "stat-label-4": "Ganho de Sensibilidade",
+                "experimental-title": "Resultados Experimentais",
+                "constants-title": "Detalhes das Constantes Físicas",
+                "table-header-1": "Constante",
+                "table-header-2": "Zero de Riemann",
+                "table-header-3": "Taxa de Sucesso",
+                "table-header-4": "p-value",
+                "table-header-5": "Força de Ressonância",
+                "constant-1": "Constante Gravitacional",
+                "constant-2": "Estrutura Fina",
+                "constant-3": "Massa do Elétron",
+                "constant-4": "Constante de Planck (ħ)",
+                "constant-5": "Massa do Próton",
+                "neutrino-title": "Detecção de Neutrinos Cósmicos",
+                "predictions-title": "Previsões para Novas Fontes",
+                "energy-label": "Energia",
+                "detection-label": "Probabilidade de Detecção",
+                "feasibility-label": "Viabilidade",
+                "feasibility-medium": "Média",
+                "energy-label2": "Energia",
+                "detection-label2": "Probabilidade de Detecção",
+                "feasibility-label2": "Viabilidade",
+                "feasibility-medium2": "Média",
+                "future-title": "Visão de Futuro",
+                "unification-title": "Unificação Física-Matemática",
+                "unification-desc": "RPC Framework conecta matemática pura com fenômenos físicos, eliminando a fronteira entre teoria e experimento.",
+                "tech-title": "Tecnologias Revolucionárias",
+                "tech-desc": "Sistemas de comunicação baseados em padrões matemáticos, novas formas de energia e tecnologias quânticas práticas.",
+                "collaboration-title": "Colaboração Global",
+                "collaboration-desc": "Dados abertos, plataformas unificadas e consórcios internacionais para validar descobertas e acelerar o progresso.",
+                "footer-desc": "Uma nova era para a humanidade, onde a compreensão profunda da estrutura matemática do universo nos capacita a resolver grandes desafios e alcançar novos patamares de civilização."
+            },
+            en: {
+                "hero-title": "RPC Framework",
+                "hero-subtitle": "Riemann-Physics Connection: Mathematical Structure of Physical Constants",
+                "hero-description": "A revolutionary framework connecting pure mathematics with physical phenomena through Riemann zeros",
+                "overview-title": "Overview",
+                "stat-label-1": "Perfect Resonance",
+                "stat-label-2": "Physical Constants",
+                "stat-label-3": "Ghost Particles",
+                "stat-label-4": "Sensitivity Gain",
+                "experimental-title": "Experimental Results",
+                "constants-title": "Physical Constants Details",
+                "table-header-1": "Constant",
+                "table-header-2": "Riemann Zero",
+                "table-header-3": "Success Rate",
+                "table-header-4": "p-value",
+                "table-header-5": "Resonance Strength",
+                "constant-1": "Gravitational Constant",
+                "constant-2": "Fine Structure",
+                "constant-3": "Electron Mass",
+                "constant-4": "Planck Constant (ħ)",
+                "constant-5": "Proton Mass",
+                "neutrino-title": "Cosmic Neutrino Detection",
+                "predictions-title": "Predictions for New Sources",
+                "energy-label": "Energy",
+                "detection-label": "Detection Probability",
+                "feasibility-label": "Feasibility",
+                "feasibility-medium": "Medium",
+                "energy-label2": "Energy",
+                "detection-label2": "Detection Probability",
+                "feasibility-label2": "Feasibility",
+                "feasibility-medium2": "Medium",
+                "future-title": "Future Vision",
+                "unification-title": "Physics-Mathematics Unification",
+                "unification-desc": "RPC Framework connects pure mathematics with physical phenomena, eliminating the boundary between theory and experiment.",
+                "tech-title": "Revolutionary Technologies",
+                "tech-desc": "Communication systems based on mathematical patterns, new forms of energy generation and practical quantum technologies.",
+                "collaboration-title": "Global Collaboration",
+                "collaboration-desc": "Open data, unified platforms and international consortia to validate discoveries and accelerate progress.",
+                "footer-desc": "A new era for humanity, where deep understanding of the universe's mathematical structure empowers us to solve great challenges and reach new levels of civilization."
+            }
+        };
+
+        // Função para trocar o idioma
+        function changeLanguage(lang) {
+            console.log('Mudando idioma para:', lang);
+            
+            // Atualiza o atributo lang do HTML
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en-US';
+            
+            // Atualiza o título da página
+            document.title = lang === 'pt' 
+                ? 'RPC Framework - Conexão Riemann-Física' 
+                : 'RPC Framework - Riemann-Physics Connection';
+            
+            // Atualiza os botões de idioma
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-lang') === lang) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Traduz todos os elementos
+            for (const key in translations[lang]) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = translations[lang][key];
+                }
+            }
+        }
+
+        // Inicialização quando a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Página carregada');
+            changeLanguage('pt'); // Começa com português
+        });
+    </script>
+</body>
+</html>
